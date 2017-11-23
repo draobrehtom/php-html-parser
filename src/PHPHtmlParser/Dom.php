@@ -391,7 +391,9 @@ class Dom
         }
 
         // strip out server side scripts
-        $str = mb_eregi_replace("(<\?)(.*?)(\?>)", '', $str);
+        if ($this->options->get('removeSmarty') == true) {
+            $str = mb_eregi_replace("(<\?)(.*?)(\?>)", '', $str);
+        }
 
         // strip smarty scripts
         $str = mb_eregi_replace("(\{\w)(.*?)(\})", '', $str);
