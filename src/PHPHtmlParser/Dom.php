@@ -390,13 +390,14 @@ class Dom
             $str = mb_eregi_replace("<\s*style\s*>(.*?)<\s*/\s*style\s*>", '', $str);
         }
 
-        // strip out server side scripts
-        if ($this->options->get('removeSmarty') == true) {
-            $str = mb_eregi_replace("(<\?)(.*?)(\?>)", '', $str);
+        $str = mb_eregi_replace("(<\?)(.*?)(\?>)", '', $str);
+	
+	// strip out server side scripts
+	if ($this->options->get('removeSmarty') == true) {
+	    $str = mb_eregi_replace("(\{\w)(.*?)(\})", '', $str);
         }
 
         // strip smarty scripts
-        $str = mb_eregi_replace("(\{\w)(.*?)(\})", '', $str);
 
         return $str;
     }
